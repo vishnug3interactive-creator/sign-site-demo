@@ -13,12 +13,11 @@ function RightSection() {
         fetchSalesHistoryList(salesID);
     }, []);
 
-    
     const tabContents = [
         <Box key='purchase' sx={{ position: 'relative' }}>
            
             <Typography variant='h6' sx={{ mb: 1 }}>
-                Needs Ordering
+                Purchase
             </Typography>
             <Typography variant='body1' color='text.secondary' sx={{ mb: 4 }}>
                 These items need purchasing but there's no purchase order associated with them yet. If you have some items in stock or the customer provides their own garments, you can remove the purchasing requirement for each such line item. You can also remove all purchasing requirements for this order at once.
@@ -56,16 +55,16 @@ function RightSection() {
                 variant="scrollable"
                 scrollButtons="auto"
                 sx={{
-                    borderBottom: '1px solid #e0e0e0',
+                
                     paddingTop:'20px',
                     minHeight: '40px',
                     '& .MuiTab-root': {
                         minHeight: '40px',
                         textTransform: 'none',
                         fontSize: '1rem',
-                        color: '#757575',
+                        color: 'black',
                         padding: '6px 12px',
-                        fontWeight: 400,
+                        fontWeight: 600,
                         '&:hover': {
                             color: '#1976d2',
                         },

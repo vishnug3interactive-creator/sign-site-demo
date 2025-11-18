@@ -1,6 +1,25 @@
-import { Box, Button, Collapse, Divider, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { ArrowDown, ArrowUp, BlueEditIcon, DateIcon } from "../../icons/Icons";
+import {
+  Box,
+  Button,
+  Collapse,
+  Divider,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
+import React, { useCallback, useState } from "react";
+import {
+  ArrowDown,
+  ArrowUp,
+  BlueEditIcon,
+  BluePlus,
+  DateIcon,
+  SmallArrow,
+  ThreeDot,
+  WhitePlus,
+} from "../../icons/Icons";
+
+const TABS = ["Items", "Jobs"];
 
 function SalesOrderPage() {
   const buttonStyle = {
@@ -8,6 +27,15 @@ function SalesOrderPage() {
     color: "#0071CE",
     fontFamily: "Nunito",
     minWidth: "auto",
+    textTransform: "none",
+  };
+
+  const BlueBgButton = {
+    backgroundColor: "#0071CE",
+    color: "white",
+    fontFamily: "Nunito",
+    minWidth: "auto",
+    textTransform: "none",
   };
 
   const headingStyle = {
@@ -40,6 +68,79 @@ function SalesOrderPage() {
   };
 
   const [open, setOpen] = useState(false);
+
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleTabChange = useCallback((_, idx) => {
+    setSelectedTab(idx);
+    fetchSalesHistoryList(salesID);
+  }, []);
+
+  const tabContents = [
+    <Box key="items" sx={{ position: "relative" }}>
+      <Box sx={{ paddingTop: "16px" }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+            backgroundColor: "#F5F6FA",
+            padding: "1rem",
+          }}
+        >
+          <Box>Item name</Box>
+          <Box>Quantity</Box>
+          <Box>Unit Discount</Box>
+          <Box>Unit Price</Box>
+          <Box>Total Price</Box>
+        </Box>
+        <Box sx={{ paddingTop: "16px" }}>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+              border: "1px solid #D9D9D9",
+              padding: "1rem",
+              borderRadius: "12px",
+            }}
+          >
+            <Box>Lorem ip - Apparel</Box>
+            <Box>18 Each</Box>
+            <Box>10 %</Box>
+            <Box>$2500.00</Box>
+            <Box>
+              $2500.00
+              <Button style={{ ...buttonStyle }}>
+              <SmallArrow/>
+              </Button>
+              <Button style={{ ...BlueBgButton}}>
+                <ThreeDot/>
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>,
+
+    <Box key="jobs" sx={{ position: "relative" }}>
+      <Box sx={{ paddingTop: "16px" }}>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+            backgroundColor: "#F5F6FA",
+            padding: "1rem",
+          }}
+        >
+          <Box>Item name</Box>
+          <Box>Quantity</Box>
+          <Box>Item Details</Box>
+          <Box>Category</Box>
+          <Box>Final Proof</Box>
+        </Box>
+        <Box></Box>
+      </Box>
+    </Box>,
+  ];
 
   return (
     <>
@@ -172,6 +273,7 @@ function SalesOrderPage() {
             </Button>
           </Box>
         </Box>
+
         <Box sx={{ paddingTop: "1.25rem" }}>
           <Box
             sx={{
@@ -928,7 +1030,6 @@ function SalesOrderPage() {
                           Terms
                           <BlueEditIcon />
                         </Typography>
-
                         <Typography style={{ ...subStyle }}>
                           Approved
                         </Typography>
@@ -947,7 +1048,6 @@ function SalesOrderPage() {
                         </Typography>
                         <Typography style={{ ...subStyle }}>No / No</Typography>
                       </Box>
-
                       <Box
                         sx={{
                           paddingTop: "1.5rem",
@@ -999,196 +1099,243 @@ function SalesOrderPage() {
                     </Box>
                   </Box>
                 </Box>
-                          
-                {/* second grid */}
-                <Box sx={{position:"relative"}} >
-                    <Box sx={{backgroundColor:'#F5F6FA',borderRadius:'12px',padding:'0.9rem'}}>
-                         <Typography style={{ ...headingStyle }}>Dates</Typography>
-                    </Box>
-                
-                  <Box sx={{border:'1px solid #D9D9D9',backgroundColor:'white',borderRadius:'12px',padding:'0.3rem',position:'absolute',top:'45px',width:'100%',padding:'20px'}}>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Button style={{ ...DateButton }}>
-                      <DateIcon />
-                    </Button>
-                    <Box
-                      sx={{
-                        paddingTop: "1.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      <Typography style={{ ...regularStyle }}>
-                        Sales Order Date
-                      </Typography>
-                      <Typography style={{ ...subStyle }}>
-                        Saturday, 15-02-2025
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Button style={{ ...DateButton }}>
-                      <DateIcon />
-                    </Button>
-                    <Box
-                      sx={{
-                        paddingTop: "1.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      <Typography style={{ ...regularStyle }}>
-                        Due Date
-                      </Typography>
-                      <Typography style={{ ...subStyle }}>
-                        Monday, 24-02-2025
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Button style={{ ...DateButton }}>
-                      <DateIcon />
-                    </Button>
-                    <Box
-                      sx={{
-                        paddingTop: "1.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      <Typography style={{ ...regularStyle }}>
-                        Art Due Date
-                      </Typography>
-                      <Typography style={{ ...subStyle }}>
-                        Saturday, 15-02-2025
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Button style={{ ...DateButton }}>
-                      <DateIcon />
-                    </Button>
-                    <Box
-                      sx={{
-                        paddingTop: "1.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      <Typography style={{ ...regularStyle }}>
-                        Production Due Date
-                      </Typography>
-                      <Typography style={{ ...subStyle }}>
-                        Saturday, 15-02-2025
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Button style={{ ...DateButton }}>
-                      <DateIcon />
-                    </Button>
-                    <Box
-                      sx={{
-                        paddingTop: "1.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      <Typography style={{ ...regularStyle }}>
-                        Next Contact Date
-                      </Typography>
-                      <Typography style={{ ...subStyle }}>
-                        Saturday, 15-02-2025
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Button style={{ ...DateButton }}>
-                      <DateIcon />
-                    </Button>
-                    <Box
-                      sx={{
-                        paddingTop: "1.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      <Typography style={{ ...regularStyle }}>
-                        Shipping Date
-                      </Typography>
-                      <Typography style={{ ...subStyle }}>
-                        Saturday, 15-02-2025
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Button style={{ ...DateButton }}>
-                      <DateIcon />
-                    </Button>
-                    <Box
-                      sx={{
-                        paddingTop: "1.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      <Typography style={{ ...regularStyle }}>
-                        Install Date
-                      </Typography>
-                      <Typography style={{ ...subStyle }}>
-                        Saturday, 15-02-2025
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                  >
-                    <Button style={{ ...DateButton }}>
-                      <DateIcon />
-                    </Button>
-                    <Box
-                      sx={{
-                        paddingTop: "1.5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.375rem",
-                      }}
-                    >
-                      <Typography style={{ ...regularStyle }}>
-                        In Hand Date
-                      </Typography>
-                      <Typography style={{ ...subStyle }}>
-                        Saturday, 15-02-2025
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-                 
 
+                {/* second grid */}
+                <Box sx={{ position: "relative" }}>
+                  <Box
+                    sx={{
+                      backgroundColor: "#F5F6FA",
+                      borderRadius: "12px",
+                      padding: "0.9rem",
+                    }}
+                  >
+                    <Typography style={{ ...headingStyle }}>Dates</Typography>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      border: "1px solid #D9D9D9",
+                      backgroundColor: "white",
+                      borderRadius: "12px",
+                      padding: "0.3rem",
+                      position: "absolute",
+                      top: "45px",
+                      width: "100%",
+                      padding: "20px",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                      }}
+                    >
+                      <Button style={{ ...DateButton }}>
+                        <DateIcon />
+                      </Button>
+                      <Box
+                        sx={{
+                          paddingTop: "1.5rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.375rem",
+                        }}
+                      >
+                        <Typography style={{ ...regularStyle }}>
+                          Sales Order Date
+                        </Typography>
+                        <Typography style={{ ...subStyle }}>
+                          Saturday, 15-02-2025
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                      }}
+                    >
+                      <Button style={{ ...DateButton }}>
+                        <DateIcon />
+                      </Button>
+                      <Box
+                        sx={{
+                          paddingTop: "1.5rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.375rem",
+                        }}
+                      >
+                        <Typography style={{ ...regularStyle }}>
+                          Due Date
+                        </Typography>
+                        <Typography style={{ ...subStyle }}>
+                          Monday, 24-02-2025
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                      }}
+                    >
+                      <Button style={{ ...DateButton }}>
+                        <DateIcon />
+                      </Button>
+                      <Box
+                        sx={{
+                          paddingTop: "1.5rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.375rem",
+                        }}
+                      >
+                        <Typography style={{ ...regularStyle }}>
+                          Art Due Date
+                        </Typography>
+                        <Typography style={{ ...subStyle }}>
+                          Saturday, 15-02-2025
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                      }}
+                    >
+                      <Button style={{ ...DateButton }}>
+                        <DateIcon />
+                      </Button>
+                      <Box
+                        sx={{
+                          paddingTop: "1.5rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.375rem",
+                        }}
+                      >
+                        <Typography style={{ ...regularStyle }}>
+                          Production Due Date
+                        </Typography>
+                        <Typography style={{ ...subStyle }}>
+                          Saturday, 15-02-2025
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                      }}
+                    >
+                      <Button style={{ ...DateButton }}>
+                        <DateIcon />
+                      </Button>
+                      <Box
+                        sx={{
+                          paddingTop: "1.5rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.375rem",
+                        }}
+                      >
+                        <Typography style={{ ...regularStyle }}>
+                          Next Contact Date
+                        </Typography>
+                        <Typography style={{ ...subStyle }}>
+                          Saturday, 15-02-2025
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                      }}
+                    >
+                      <Button style={{ ...DateButton }}>
+                        <DateIcon />
+                      </Button>
+                      <Box
+                        sx={{
+                          paddingTop: "1.5rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.375rem",
+                        }}
+                      >
+                        <Typography style={{ ...regularStyle }}>
+                          Shipping Date
+                        </Typography>
+                        <Typography style={{ ...subStyle }}>
+                          Saturday, 15-02-2025
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                      }}
+                    >
+                      <Button style={{ ...DateButton }}>
+                        <DateIcon />
+                      </Button>
+                      <Box
+                        sx={{
+                          paddingTop: "1.5rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.375rem",
+                        }}
+                      >
+                        <Typography style={{ ...regularStyle }}>
+                          Install Date
+                        </Typography>
+                        <Typography style={{ ...subStyle }}>
+                          Saturday, 15-02-2025
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                      }}
+                    >
+                      <Button style={{ ...DateButton }}>
+                        <DateIcon />
+                      </Button>
+                      <Box
+                        sx={{
+                          paddingTop: "1.5rem",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.375rem",
+                        }}
+                      >
+                        <Typography style={{ ...regularStyle }}>
+                          In Hand Date
+                        </Typography>
+                        <Typography style={{ ...subStyle }}>
+                          Saturday, 15-02-2025
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
                 </Box>
               </Box>
-             {/* Details */}
+              {/* Details */}
               <Box sx={{ display: "grid", padding: "1.5rem" }}>
                 <Typography style={{ ...headingStyle }}>Details</Typography>
                 <Box
@@ -1225,7 +1372,6 @@ function SalesOrderPage() {
                       display: "flex",
                       flexDirection: "column",
                       gap: "0.375rem",
-                     
                     }}
                   >
                     <Typography style={{ ...regularStyle }}>
@@ -1242,7 +1388,6 @@ function SalesOrderPage() {
                       display: "flex",
                       flexDirection: "column",
                       gap: "0.375rem",
-                     
                     }}
                   >
                     <Typography
@@ -1292,7 +1437,6 @@ function SalesOrderPage() {
                       display: "flex",
                       flexDirection: "column",
                       gap: "0.375rem",
-                     
                     }}
                   >
                     <Typography
@@ -1314,7 +1458,6 @@ function SalesOrderPage() {
                       display: "flex",
                       flexDirection: "column",
                       gap: "0.375rem",
-                     
                     }}
                   >
                     <Typography
@@ -1333,7 +1476,7 @@ function SalesOrderPage() {
                 </Box>
               </Box>
               {/* others */}
-                <Box sx={{ display: "grid", padding: "1.5rem" }}>
+              <Box sx={{ display: "grid", padding: "1.5rem" }}>
                 <Typography style={{ ...headingStyle }}>Others</Typography>
                 <Box
                   sx={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}
@@ -1354,7 +1497,7 @@ function SalesOrderPage() {
                         gap: "6px",
                       }}
                     >
-                     Sales Order Title
+                      Sales Order Title
                       <BlueEditIcon />
                     </Typography>
 
@@ -1369,13 +1512,17 @@ function SalesOrderPage() {
                       display: "flex",
                       flexDirection: "column",
                       gap: "0.375rem",
-                     
                     }}
                   >
-                    <Typography style={{ ...regularStyle, display: "flex",
+                    <Typography
+                      style={{
+                        ...regularStyle,
+                        display: "flex",
                         alignItems: "center",
-                        gap: "6px", }}>
-                     Customer PO
+                        gap: "6px",
+                      }}
+                    >
+                      Customer PO
                       <BlueEditIcon />
                     </Typography>
                     <Typography style={{ ...subStyle }}>
@@ -1389,7 +1536,6 @@ function SalesOrderPage() {
                       display: "flex",
                       flexDirection: "column",
                       gap: "0.375rem",
-                     
                     }}
                   >
                     <Typography
@@ -1400,7 +1546,7 @@ function SalesOrderPage() {
                         gap: "6px",
                       }}
                     >
-                     Customer PO Date
+                      Customer PO Date
                       <BlueEditIcon />
                     </Typography>
 
@@ -1408,18 +1554,88 @@ function SalesOrderPage() {
                       Dianne Rachel
                     </Typography>
                   </Box>
-
-                
-
-               
-        
                 </Box>
               </Box>
             </Collapse>
           </Box>
         </Box>
 
-        <Box></Box>
+        <Box sx={{ paddingTop: "1.25rem" }}>
+          <Box
+            sx={{
+              backgroundColor: "white",
+              padding: "1.5rem",
+              borderRadius: "0.75rem",
+            }}
+          >
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box>
+                {" "}
+                <Tabs
+                  value={selectedTab}
+                  onChange={handleTabChange}
+                  aria-label="Sidebar Tabs"
+                  variant="scrollable"
+                  scrollButtons="auto"
+                  sx={{
+                    minHeight: "40px",
+                    "& .MuiTab-root": {
+                      minHeight: "40px",
+                      textTransform: "none",
+                      fontSize: "1rem",
+                      color: "black",
+                      padding: "6px 12px",
+                      fontWeight: 600,
+                      "&:hover": {
+                        color: "#1976d2",
+                      },
+                    },
+                    "& .Mui-selected": {
+                      color: "#1976d2",
+                      fontWeight: 500,
+                    },
+                    "& .MuiTabs-indicator": {
+                      backgroundColor: "#1976d2",
+                      height: "3px",
+                      borderRadius: "2px 2px 0 0",
+                    },
+
+                    "& .MuiSvgIcon-root": {
+                      backgroundColor: "#B6B6B6",
+                      color: "#fff",
+                      borderRadius: "0.313rem",
+                    },
+                  }}
+                  ScrollButtonComponent={(props) => {
+                    return props.direction === "left" ? (
+                      <ArrowBackIcon
+                        sx={{ fontSize: "18px", color: "#757575" }}
+                      />
+                    ) : (
+                      <ArrowForwardIcon
+                        sx={{ fontSize: "18px", color: "#757575" }}
+                      />
+                    );
+                  }}
+                >
+                  {TABS.map((label) => (
+                    <Tab key={label} label={label} />
+                  ))}
+                </Tabs>
+              </Box>
+
+              <Box sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+                <Button style={{ ...buttonStyle }}>Variant History</Button>
+                <Button style={{ ...buttonStyle }}>+ Create Job</Button>
+                <Button style={{ ...BlueBgButton }}>+ Add Items</Button>
+              </Box>
+            </Box>
+
+            <Box sx={{ p: 2, height: "40rem", overflow: "auto" }}>
+              {tabContents[selectedTab]}
+            </Box>
+          </Box>
+        </Box>
       </Box>
     </>
   );

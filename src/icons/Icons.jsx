@@ -22,6 +22,47 @@ export const BlueEditIcon=()=>(
 
 )
 
+export const BluePlus=()=>(
+      <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 5.22775V3.78086H3.76222V0H5.23778V3.78086H9V5.22775H5.23778V9H3.76222V5.22775H0Z" fill="#0071CE"/>
+</svg>
+
+)
+
+export const WhitePlus=()=>(
+      <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 5.22775V3.78086H3.76222V0H5.23778V3.78086H9V5.22775H5.23778V9H3.76222V5.22775H0Z" fill="white"/>
+</svg>
+
+)
+
+
+export const SmallArrow=()=>(
+       <svg
+                        width="12"
+                        height="7"
+                        viewBox="0 0 12 7"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M10.75 0.75L5.75 5.75L0.75 0.75"
+                          stroke="#0071CE"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+)
+
+export const ThreeDot=()=>(
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="2.70312" cy="6.90039" r="1.5" fill="white"/>
+<circle cx="7.5" cy="6.90039" r="1.5" fill="white"/>
+<circle cx="12.2969" cy="6.90039" r="1.5" fill="white"/>
+</svg>
+
+)
 
 
 export const DateIcon=()=>(
