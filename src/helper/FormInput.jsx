@@ -9,11 +9,12 @@ export const SearchboxField = ({ label, value, placeholder }) => {
       label={label}
       InputLabelProps={{
         shrink: false,
-        style: {
+        style:{
           color: "#9CA3AF",
           marginLeft:'30px',
-          width:'24.25rem'
+    
         },
+       
       }}
       InputProps={{
         startAdornment: (
@@ -48,6 +49,10 @@ export const SearchboxField = ({ label, value, placeholder }) => {
         ),
       }}
       sx={{
+        width:'24.25rem',
+        heigth:'2.5rem',
+        backgroundColor:'#F5F6FA',
+        fontFamily:'Nunito',
         "& .MuiOutlinedInput-root": {
           "& fieldset": { borderColor: "#D1D5DB" },
           "&:hover fieldset": { borderColor: "#D1D5DB" },
