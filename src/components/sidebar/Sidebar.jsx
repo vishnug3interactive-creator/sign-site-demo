@@ -1,6 +1,7 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React, { useState } from "react";
 import logo from "../../assets/images/sidebar/signsite.png";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const HomeSvg = () => (
   <svg
@@ -124,7 +125,19 @@ const SettingSvg = () => (
 
 const menuItems = [
   { id: "home", label: "Dashboard", icon: <HomeSvg /> },
-  { id: "jobs", label: "Jobs", icon: <JobSvg /> },
+  // { id: "jobs", label: "Jobs", icon: <JobSvg /> },
+  { 
+    id: "jobs", 
+    label: "Jobs", 
+    icon: <JobSvg />,
+    children: [
+      { id: "quotes", label: "Quotes", path: "/quotes" },
+      { id: "task", label: "Task", path: "/task" },
+      { id: "invoices", label: "Invoices", path: "/invoices" },
+      { id: "sales-orders", label: "Sales Orders", path: "/" },
+      { id: "purchase-orders", label: "Purchase Orders", path: "/purchase-orders" },
+    ]
+  },
   { id: "workflow", label: "Workflow", icon: <WorkflowSvg /> },
   { id: "clients", label: "Clients", icon: <ClientSvg /> },
   { id: "products", label: "Products", icon: <ProductSvg /> },
@@ -134,11 +147,24 @@ const menuItems = [
 ];
 
 function Sidebar() {
-  const [openMenu, setOpenMenu] = useState(null);
+  const [openMenu, setOpenMenu] = useState("jobs");
+
+  const navigate=useNavigate()
+  const location=useLocation()
+
+    const handleSubMenuClick = (path) => {
+    navigate(path);
+  };
 
   const handleToggle = (id) => {
     setOpenMenu(openMenu === id ? null : id);
   };
+
+   const isParentActive = (item) => {
+    if (!item.children) return false;
+    return item.children.some(child => location.pathname === child.path);
+  };
+
   return (
     <Box>
       <Box
@@ -154,7 +180,7 @@ function Sidebar() {
 
       <Divider />
 
-      <Box sx={{ padding: "1rem" }}>
+      {/* <Box sx={{ padding: "1rem" }}>
         {menuItems.map((item) => (
           <Box key={item.id}>
             <Box
@@ -210,7 +236,100 @@ function Sidebar() {
             )}
           </Box>
         ))}
+      </Box> */}
+            <Box>
+      
+
+      <Box sx={{ padding: "1rem" }}>
+        {menuItems.map((item) => (
+          <Box key={item.id}>
+            <Box
+              onClick={() => item.children && handleToggle(item.id)}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "15px 10px",
+                borderRadius: "8px",
+                cursor: "pointer",
+                backgroundColor: isParentActive(item) ? "#0071CE" : "transparent",
+                "&:hover": {
+                  backgroundColor: isParentActive(item) ? "#0071CE" : "#F3F4F6"
+                }
+              }}
+            >
+              <Box sx={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <Box sx={{ 
+                  display: "flex",
+                  "& svg path": {
+                    fill: isParentActive(item) ? "#FFFFFF" : "#4B5563"
+                  }
+                }}>
+                  {item.icon}
+                </Box>
+                <Typography sx={{ 
+                  color: isParentActive(item) ? "#FFFFFF" : "#4B5563", 
+                  fontFamily: "Nunito",
+                  fontWeight: isParentActive(item) ? 600 : 400
+                }}>
+                  {item.label}
+                </Typography>
+              </Box>
+
+              {item.children && (
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{
+                    transform: openMenu === item.id ? 'rotate(90deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.2s'
+                  }}
+                >
+                  <path
+                    d="M7.5 15L12.5 10L7.5 5"
+                    stroke={isParentActive(item) ? "#FFFFFF" : "#4B5563"}
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
+            </Box>
+
+            {item.children && openMenu === item.id && (
+              <Box sx={{ marginLeft: "40px", marginTop: "6px" }}>
+                {item.children.map((sub) => (
+                  <Box
+                    key={sub.id}
+                    onClick={() => handleSubMenuClick(sub.path)}
+                    sx={{
+                      padding: "10px 12px",
+                      cursor: "pointer",
+                      borderRadius: "6px",
+                      backgroundColor: location.pathname === sub.path ? "#E0F2FE" : "transparent",
+                      color: location.pathname === sub.path ? "#0284C7" : "#111827",
+                      fontFamily: "Nunito",
+                      fontSize: "16px",
+                      marginBottom: "4px",
+                      fontWeight: location.pathname === sub.path ? 600 : 400,
+                      "&:hover": { 
+                        backgroundColor: location.pathname === sub.path ? "#E0F2FE" : "#F3F4F6"
+                      },
+                    }}
+                  >
+                    {sub.label}
+                  </Box>
+                ))}
+              </Box>
+            )}
+          </Box>
+        ))}
       </Box>
+    </Box>
+
     </Box>
   );
 }

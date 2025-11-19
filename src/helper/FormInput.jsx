@@ -6,15 +6,12 @@ export const SearchboxField = ({ label, value, placeholder }) => {
     //   fullWidth
       variant="outlined"
       placeholder={placeholder}
-      label={label}
       InputLabelProps={{
         shrink: false,
         style:{
           color: "#9CA3AF",
           marginLeft:'30px',
-    
         },
-       
       }}
       InputProps={{
         startAdornment: (

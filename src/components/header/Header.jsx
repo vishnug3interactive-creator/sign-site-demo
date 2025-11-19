@@ -7,7 +7,7 @@ function Header() {
   return (
     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
       <Box sx={{ display: "flex",paddingLeft:'1.5rem'}}>
-        <Box className="icon" sx={{paddingTop:'1.5rem',paddingRight:'1.5rem',paddingBottom:'1.5rem',display:'flex',justifyContent:'center',alignItems:'center' }}>
+        <Box className="icon" sx={{paddingTop:'1rem',paddingRight:'1.5rem',paddingBottom:'1rem',display:'flex',justifyContent:'center',alignItems:'center' }}>
           <svg
             width="24"
             height="25"
@@ -25,7 +25,7 @@ function Header() {
         </Box>
         <Box className="search-box" sx={{ paddingTop:'1rem',paddingBottom:'1rem'}}>
           <Box>
-            <SearchboxField label="Search" />
+            <SearchboxField placeholder="Search" />
           </Box>
         </Box>
       </Box>
@@ -124,7 +124,6 @@ function Header() {
               }}
             >
             
-
             </Box>
           </Box>
          
